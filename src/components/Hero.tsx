@@ -6,7 +6,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Button } from "./ui/button";
 
 export function Hero() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -36,19 +36,6 @@ export function Hero() {
           ease: "easeInOut",
         }}
         className="absolute top-20 left-10 w-20 h-20 bg-accent/20 rounded-full blur-xl"
-      />
-
-      <motion.div
-        animate={{
-          y: [0, 30, 0],
-          rotate: [0, -5, 0],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute bottom-32 right-16 w-32 h-32 bg-secondary/20 rounded-full blur-xl"
       />
 
       {/* Content */}
@@ -93,7 +80,15 @@ export function Hero() {
                   animate={{ x: [0, 5, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 >
-                  <ArrowRight className="ml-2" size={20} />
+                  <ArrowRight
+                    className={`${language === "AR" ? "mr-2" : "ml-2"}`}
+                    size={20}
+                    style={{
+                      transform:
+                        language === "AR" ? "rotate(180deg)" : "rotate(0deg)",
+                      transition: "transform 0.3s ease",
+                    }}
+                  />
                 </motion.div>
               </Button>
             </motion.div>
@@ -102,30 +97,33 @@ export function Hero() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-primary px-8 py-3 text-lg"
+                className="border-white text-primary hover:bg-white hover:text-primary px-8 py-3 text-lg"
               >
-                <Play className="mr-2" size={20} />
+                <Play
+                  className={language === "AR" ? "ml-2" : "mr-2"}
+                  size={20}
+                />
                 {t("hero.cta2")}
               </Button>
             </motion.div>
           </motion.div>
         </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-            <motion.div
-              className="w-1 h-3 bg-white rounded-full mt-2"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </div>
-        </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+          <motion.div
+            className="w-1 h-3 bg-white rounded-full mt-2"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+        </div>
+      </motion.div>
     </section>
   );
 }

@@ -6,7 +6,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Button } from "./ui/button";
 
 export function About() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   return (
     <section className="py-20 bg-gradient-to-br from-primary/5 to-secondary/5 relative overflow-hidden">
       {/* Background Animations */}
@@ -136,7 +136,15 @@ export function About() {
                   className="bg-primary hover:bg-primary/90 text-white px-8 py-3"
                 >
                   {t("about.read")}
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight
+                    className={`${language === "AR" ? "mr-2" : "ml-2"}`}
+                    size={20}
+                    style={{
+                      transform:
+                        language === "AR" ? "rotate(180deg)" : "rotate(0deg)",
+                      transition: "transform 0.3s ease",
+                    }}
+                  />
                 </Button>
               </motion.div>
             </motion.div>

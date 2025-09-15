@@ -1,4 +1,4 @@
-import { ArrowRight, Clock, Tag, User } from "lucide-react";
+import { ArrowRight, Tag } from "lucide-react";
 import { motion } from "motion/react";
 import React from "react";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -7,41 +7,38 @@ import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 
 export function Blog() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const articles = [
     {
-      title: "10 Essential Steps to Launch Your Startup Successfully",
-      excerpt:
-        "Discover the proven methodology that helped over 500 startups achieve their first-year milestones and secure funding.",
+      title: t("blog.post1.title"),
+      excerpt: "تعاون استراتيجي جديد مع مزود اتصالات – مارس 2025.",
       image:
         "https://images.unsplash.com/photo-1601058660898-82c168404c88?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdGFydHVwJTIwZW50cmVwcmVuZXVyJTIwc3VjY2Vzc3xlbnwxfHx8fDE3NTc4OTAyODZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      author: "Sarah Johnson",
-      date: "Sep 12, 2024",
-      readTime: "8 min read",
-      category: "Startup Guide",
+      author: "وصلة",
+      date: t("blog.post1.date"),
+      readTime: "5 دقائق قراءة",
+      category: "أخبار",
       featured: true,
     },
     {
-      title: "Market Research: The Foundation of Every Successful Business",
-      excerpt:
-        "Learn how comprehensive market analysis can save you time, money, and help you identify the right opportunities.",
+      title: t("blog.post2.title"),
+      excerpt: "مشاركتنا في معرض التقنية – أبريل 2025.",
       image:
         "https://images.unsplash.com/photo-1730382624709-81e52dd294d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGdyb3d0aCUyMGNoYXJ0fGVufDF8fHx8MTc1Nzc4NDMwOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      author: "Michael Chen",
-      date: "Sep 10, 2024",
-      readTime: "6 min read",
-      category: "Market Analysis",
+      author: "وصلة",
+      date: t("blog.post2.date"),
+      readTime: "4 دقائق قراءة",
+      category: "أحداث",
     },
     {
-      title: "Building a Strong Team: From Hiring to Leadership",
-      excerpt:
-        "Essential strategies for assembling and leading a high-performing team that drives your business forward.",
+      title: t("blog.post3.title"),
+      excerpt: "ميزات جديدة في لوحات القياس – مايو 2025.",
       image:
         "https://images.unsplash.com/photo-1670851050245-d861fd433d06?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB0ZWFtJTIwY29sbGFib3JhdGlvbnxlbnwxfHx8fDE3NTc4NDk3NDh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      author: "Emily Rodriguez",
-      date: "Sep 8, 2024",
-      readTime: "10 min read",
-      category: "Team Building",
+      author: "وصلة",
+      date: t("blog.post3.date"),
+      readTime: "6 دقائق قراءة",
+      category: "تحديثات",
     },
   ];
 
@@ -148,18 +145,6 @@ export function Blog() {
 
               {/* Content */}
               <CardContent className="p-8 flex flex-col justify-center">
-                <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
-                  <div className="flex items-center gap-1">
-                    <User size={16} />
-                    {articles[0].author}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Clock size={16} />
-                    {articles[0].readTime}
-                  </div>
-                  <span>{articles[0].date}</span>
-                </div>
-
                 <h3 className="text-2xl md:text-3xl font-bold text-primary mb-4 group-hover:text-secondary transition-colors duration-300">
                   {articles[0].title}
                 </h3>
@@ -173,8 +158,16 @@ export function Blog() {
                   transition={{ duration: 0.3 }}
                 >
                   <Button className="bg-primary hover:bg-primary/90 text-white">
-                    Read Full Article
-                    <ArrowRight className="ml-2 w-4 h-4" />
+                    {t("blog.readMore")}
+                    <ArrowRight
+                      className={`${language === "AR" ? "mr-2" : "ml-2"}`}
+                      size={16}
+                      style={{
+                        transform:
+                          language === "AR" ? "rotate(180deg)" : "rotate(0deg)",
+                        transition: "transform 0.3s ease",
+                      }}
+                    />
                   </Button>
                 </motion.div>
               </CardContent>
@@ -213,17 +206,6 @@ export function Blog() {
                 </div>
 
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
-                    <div className="flex items-center gap-1">
-                      <User size={14} />
-                      {article.author}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock size={14} />
-                      {article.readTime}
-                    </div>
-                  </div>
-
                   <h3 className="text-xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors duration-300 line-clamp-2">
                     {article.title}
                   </h3>
@@ -232,10 +214,7 @@ export function Blog() {
                     {article.excerpt}
                   </p>
 
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500">
-                      {article.date}
-                    </span>
+                  <div className="flex items-center justify-end">
                     <motion.div
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.3 }}
@@ -244,8 +223,18 @@ export function Blog() {
                         variant="ghost"
                         className="text-primary hover:text-secondary hover:bg-secondary/10 p-0"
                       >
-                        Read More
-                        <ArrowRight className="ml-2 w-4 h-4" />
+                        {t("blog.readMore")}
+                        <ArrowRight
+                          className={`${language === "AR" ? "mr-2" : "ml-2"}`}
+                          size={16}
+                          style={{
+                            transform:
+                              language === "AR"
+                                ? "rotate(180deg)"
+                                : "rotate(0deg)",
+                            transition: "transform 0.3s ease",
+                          }}
+                        />
                       </Button>
                     </motion.div>
                   </div>
@@ -268,8 +257,16 @@ export function Blog() {
               size="lg"
               className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3"
             >
-              View All Articles
-              <ArrowRight className="ml-2 w-5 h-5" />
+              {t("blog.readMore")}
+              <ArrowRight
+                className={`${language === "AR" ? "mr-2" : "ml-2"}`}
+                size={20}
+                style={{
+                  transform:
+                    language === "AR" ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 0.3s ease",
+                }}
+              />
             </Button>
           </motion.div>
         </motion.div>

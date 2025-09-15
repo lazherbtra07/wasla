@@ -6,7 +6,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Button } from "./ui/button";
 
 export function SecondaryCTA() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   return (
     <section className="py-20 relative overflow-hidden">
       {/* Background Image with Overlay */}
@@ -120,7 +120,15 @@ export function SecondaryCTA() {
                   transition={{ duration: 0.6 }}
                 />
                 {t("cta.button")}
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <ArrowRight
+                  className={`${language === "AR" ? "mr-2" : "ml-2"}`}
+                  size={20}
+                  style={{
+                    transform:
+                      language === "AR" ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.3s ease",
+                  }}
+                />
               </Button>
             </motion.div>
 
@@ -130,7 +138,10 @@ export function SecondaryCTA() {
                 variant="outline"
                 className="border-2 border-white text-white hover:bg-white hover:text-primary px-10 py-4 text-lg backdrop-blur-sm"
               >
-                <Phone className="mr-2 w-5 h-5" />
+                <Phone
+                  className={language === "AR" ? "ml-2" : "mr-2"}
+                  size={20}
+                />
                 {t("cta.contact")}
               </Button>
             </motion.div>
@@ -147,21 +158,21 @@ export function SecondaryCTA() {
             {[
               {
                 icon: Phone,
-                title: "Call Us",
-                description: "+1 (555) 123-4567",
-                action: "Available 24/7",
+                title: t("cta.call.title"),
+                description: t("cta.call.description"),
+                action: t("cta.call.action"),
               },
               {
                 icon: Mail,
-                title: "Email Us",
-                description: "hello@businessconsult.com",
-                action: "Quick Response",
+                title: t("cta.email.title"),
+                description: t("cta.email.description"),
+                action: t("cta.email.action"),
               },
               {
                 icon: MessageCircle,
-                title: "Live Chat",
-                description: "Chat with our experts",
-                action: "Instant Support",
+                title: t("cta.chat.title"),
+                description: t("cta.chat.description"),
+                action: t("cta.chat.action"),
               },
             ].map((contact, index) => (
               <motion.div
@@ -204,7 +215,7 @@ export function SecondaryCTA() {
               }}
             >
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-              <span>500+ Successful Launches</span>
+              <span>{t("cta.trust.launches")}</span>
             </motion.div>
 
             <motion.div
@@ -219,7 +230,7 @@ export function SecondaryCTA() {
               }}
             >
               <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse" />
-              <span>98% Client Satisfaction</span>
+              <span>{t("cta.trust.satisfaction")}</span>
             </motion.div>
 
             <motion.div
@@ -234,7 +245,7 @@ export function SecondaryCTA() {
               }}
             >
               <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />
-              <span>Award-Winning Team</span>
+              <span>{t("cta.trust.award")}</span>
             </motion.div>
           </motion.div>
         </motion.div>

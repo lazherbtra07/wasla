@@ -5,7 +5,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Card, CardContent } from "./ui/card";
 
 export function Testimonials() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const testimonials = [
     {
@@ -106,7 +106,10 @@ export function Testimonials() {
             <motion.div
               className="flex"
               animate={{
-                x: `-${currentIndex * 100}%`,
+                x:
+                  language === "AR"
+                    ? `${currentIndex * 100}%`
+                    : `-${currentIndex * 100}%`,
               }}
               transition={{
                 type: "tween",
@@ -115,8 +118,8 @@ export function Testimonials() {
               }}
             >
               {testimonials.map((testimonial, index) => (
-                <div key={index} className="w-full flex-shrink-0">
-                  <Card className="mx-4 border-0 shadow-2xl bg-white/90 backdrop-blur-sm overflow-hidden">
+                <div key={index} className="w-full h-auto flex-shrink-0">
+                  <Card className="mx-4 border-0  bg-white/90 backdrop-blur-sm overflow-hidden">
                     <CardContent className="p-0">
                       <div className="flex flex-col lg:flex-row">
                         {/* Image Section */}

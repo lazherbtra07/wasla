@@ -15,7 +15,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 
 export function Services() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const services = [
     {
@@ -159,7 +159,7 @@ export function Services() {
                   </div>
                 </div>
 
-                <CardContent className="p-6">
+                <CardContent className="p-4">
                   <h3 className="text-xl font-bold text-primary mb-3">
                     {t(service.titleKey)}
                   </h3>
@@ -177,7 +177,17 @@ export function Services() {
                       className="text-primary hover:bg-primary/10 p-0"
                     >
                       {t("services.learn")}
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <ArrowRight
+                        className={`${language === "AR" ? "mr-2" : "ml-2"}`}
+                        size={16}
+                        style={{
+                          transform:
+                            language === "AR"
+                              ? "rotate(180deg)"
+                              : "rotate(0deg)",
+                          transition: "transform 0.3s ease",
+                        }}
+                      />
                     </Button>
                   </motion.div>
                 </CardContent>
@@ -209,7 +219,15 @@ export function Services() {
               className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3"
             >
               {t("services.view")}
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight
+                className={`${language === "AR" ? "mr-2" : "ml-2"}`}
+                size={20}
+                style={{
+                  transform:
+                    language === "AR" ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 0.3s ease",
+                }}
+              />
             </Button>
           </motion.div>
         </motion.div>

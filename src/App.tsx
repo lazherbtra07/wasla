@@ -1,18 +1,20 @@
-import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { ValueProposition } from './components/ValueProposition';
-import { Services } from './components/Services';
-import { About } from './components/About';
-import { Portfolio } from './components/Portfolio';
-import { Testimonials } from './components/Testimonials';
-import { SecondaryCTA } from './components/SecondaryCTA';
-import { Blog } from './components/Blog';
-import { Footer } from './components/Footer';
-import { LanguageProvider } from './contexts/LanguageContext';
+import React from "react";
+import { About } from "./components/About";
+import { Blog } from "./components/Blog";
+import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
+import { Hero } from "./components/Hero";
+import { Portfolio } from "./components/Portfolio";
+import { Process } from "./components/process";
+import { SecondaryCTA } from "./components/SecondaryCTA";
+import { Services } from "./components/Services";
+import { Testimonials } from "./components/Testimonials";
+import { ValueProposition } from "./components/ValueProposition";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 export default function App() {
   return (
-    <LanguageProvider>
+    <LanguageProvider children={undefined}>
       <div className="min-h-screen">
         <Header />
         <main>
@@ -27,6 +29,7 @@ export default function App() {
             <About />
           </section>
           <Portfolio />
+          <Process />
           <Testimonials />
           <SecondaryCTA />
           <Blog />

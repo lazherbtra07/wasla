@@ -25,12 +25,12 @@ export function Footer() {
   ];
 
   const services = [
-    "Business Strategy",
-    "Market Analysis",
-    "Team Building",
-    "Goal Setting",
-    "Legal & Compliance",
-    "Financial Planning",
+    { nameKey: "footer.services.business", href: "#services" },
+    { nameKey: "footer.services.market", href: "#services" },
+    { nameKey: "footer.services.team", href: "#services" },
+    { nameKey: "footer.services.goal", href: "#services" },
+    { nameKey: "footer.services.legal", href: "#services" },
+    { nameKey: "footer.services.financial", href: "#services" },
   ];
 
   const socialMedia = [
@@ -160,10 +160,10 @@ export function Footer() {
                   transition={{ duration: 0.3 }}
                 >
                   <a
-                    href="#services"
+                    href={service.href}
                     className="text-white/80 hover:text-white transition-colors duration-300 relative group"
                   >
-                    {service}
+                    {t(service.nameKey)}
                     <motion.div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
                   </a>
                 </motion.li>
